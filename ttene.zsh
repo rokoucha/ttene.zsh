@@ -1,5 +1,4 @@
 #  _   _                            _
-# | | | |                          | |
 # | |_| |_ ___ _ __   ___   _______| |__
 # | __| __/ _ \ '_ \ / _ \ |_  / __| '_ \
 # | |_| ||  __/ | | |  __/_ / /\__ \ | | |
@@ -7,22 +6,25 @@
 # さなちゃん作業するところ見てて…
 autoload -Uz add-zsh-hook
 
-# sigh with execute status
-add-zsh-hook precmd exec_status_ttene
+# Tell me your voices folder
+export TTENE_DIR=$(cd $(dirname $0); pwd)
 
-exec_status_ttene() {
-    if [ $? -eq 0 ]; then
-        ( { mplayer "voices/はーーー.mp3" } &; ) >/dev/null 2>&1
-    fi
-}
+# sigh with execute status
+#add-zsh-hook precmd exec-status-ttene
+
+#exec-status-ttene() {
+#    if [ $? -eq 0 ]; then
+#        ( { mplayer "voices/はーーー.mp3" } &; ) >/dev/null 2>&1
+#    fi
+#}
 
 # ttene with new line
-accept_line_ttene() {
+accept-line-ttene() {
     zle accept-line
-    echo $[${RANDOM}%`ls -1 voices|grep -E 'てねっ[0-9]+.mp3$'|wc -l`] >/dev/null
-    local ttene="voices/てねっ$(printf %02d $[${RANDOM}%`ls -1 voices|grep -E 'てねっ[0-9]+.mp3$'|wc -l`]).mp3"
-    ( { mplayer ${ttene} } &; ) >/dev/null 2>&1
+    local voices=(`ls -1 ${TTENE_DIR}/voices|grep -E 'てねっ[0-9]+'|xargs`)
+    local choice=$[${RANDOM}%${#voices[@]}+1]
+    ( { mplayer "${TTENE_DIR}/voices/${voices[$choice]}" } &; ) >/dev/null 2>&1
 }
 
-zle -N accept_line_ttene
-bindkey "^M" accept_line_ttene
+zle -N accept-line-ttene
+bindkey "^M" accept-line-ttene
