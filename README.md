@@ -23,4 +23,3 @@ zplug "atnanasi/ttene.zsh", defer:2, \↲
 
 - Vim [h1manoa/ttene.vim](https://github.com/himanoa/ttene.nvim)
 - Emacs [shibafu528/ttene-mode](https://github.com/shibafu528/ttene-mode)
-- Zsh [atnanasi/ttene.zsh](https://github.com/atnanasi/ttene.zsh)
