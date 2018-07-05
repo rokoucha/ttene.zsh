@@ -9,6 +9,9 @@ autoload -Uz add-zsh-hook
 # Tell me your voices folder
 export TTENE_DIR=$(cd $(dirname $0); pwd)
 
+# select mplayer or afplay
+[ -e afplay ] && export TTENE_PLAYER=afplay || export TTENE_PLAYER=mplayer
+
 # sigh with execute status
 #add-zsh-hook precmd exec-status-ttene
 
