@@ -10,8 +10,8 @@
 ## インストール(zplug)
 
 ```zshrc.zsh
-zplug "atnanasi/ttene.zsh", defer:2, \↲
-        hook-build:'magicalstick | grep -E "てねっ[0-9]+" | xargs -P4 -In1 wget n1 -P voices/'
+zplug "atnanasi/ttene.zsh", defer:2, \
+  hook-build:'magicalstick | grep -E "てねっ[0-9]+" | xargs -P4 -In1 wget n1 -P $ZPLUG_HOME/repos/atnanasi/ttene.zsh/voices/'
 ```
 
 注意点として
