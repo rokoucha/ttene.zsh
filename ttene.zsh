@@ -17,7 +17,7 @@ export TTENE_DIR=$(cd $(dirname $0); pwd)
 
 #exec-status-ttene() {
 #    if [ $? -eq 0 ]; then
-#        ( { mplayer "voices/はーーー.mp3" } &; ) >/dev/null 2>&1
+#        ( { $TTENE_PLAYER "voices/はーーー.mp3" } &; ) >/dev/null 2>&1
 #    fi
 #}
 
@@ -26,7 +26,7 @@ accept-line-ttene() {
     zle accept-line
     local voices=(`ls -1 ${TTENE_DIR}/voices|grep -E 'てねっ[0-9]+'|xargs`)
     local choice=$[${RANDOM}%${#voices[@]}+1]
-    ( { mplayer "${TTENE_DIR}/voices/${voices[$choice]}" } &; ) >/dev/null 2>&1
+    ( { $TTENE_PLAYER "${TTENE_DIR}/voices/${voices[$choice]}" } &; ) >/dev/null 2>&1
 }
 
 zle -N accept-line-ttene
